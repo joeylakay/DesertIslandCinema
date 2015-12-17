@@ -1,0 +1,256 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <link rel="icon" href="clapper.ico" type="image/x-icon"/>
+    <title>Desert Island Cinema</title>
+
+    <!-- Bootstrap 3 -->
+    <link rel="stylesheet" href="libs/bootstrap.min.css">
+    <link rel="stylesheet" href="libs/bootstrap-theme.min.css">
+    <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+    <script src="libs/bootstrap.min.js"></script>
+
+    <!-- Styling  -->
+    <link href='https://fonts.googleapis.com/css?family=Poiret+One'
+    rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Lobster'
+    rel='stylesheet' type='text/css'>
+    <style type="text/css" media="screen">
+        body {
+          padding-top: 10px;
+          font-family: 'Poiret One', cursive;
+          background: #000000;
+        }
+        h3 {
+          color: #DFDFDF;
+        }
+        .navbar {
+          color: #1F1F1F;
+          margin-left: -2em;
+          margin-bottom: 4em;
+          padding-left: 2em;
+        }
+        .navbar-brand
+        {
+          padding-top: 0;
+        }
+        #title {
+          padding: 20px;
+          font-family: 'Lobster', cursive;
+          font-size: 1.5em;
+          color: #FFFFFF;
+        }
+        #trailer .modal-dialog {
+            margin-top: 200px;
+            width: 960px;
+            height: 480px;
+        }
+        .modal-backdrop.in {
+            background-color: black;
+            opacity: 0.85 !important;
+        }
+        .hanging-close {
+            position: absolute;
+            top: -12px;
+            right: -12px;
+            z-index: 9001;
+        }
+        #trailer-video {
+            width: 100%;
+            height: 100%;
+        }
+        .movie-tile {
+            margin-top: 30px;
+            margin-bottom: 20px;
+            padding-top: 20px;
+        }
+        .movie-tile:hover {
+          cursor: pointer;
+          opacity: 1;
+        }
+        .media {
+          display: inline-block;
+          position: relative;
+          vertical-align: top;
+          margin-top: 30px;
+          margin-bottom: 20px;
+        }
+        .media__image { display: block; }
+        .media__body {
+          display: block;
+          background: rgba(0, 0, 0, 0.85);
+          bottom: 0;
+          color: white;
+          font-size: 1em;
+          left: 0;
+          opacity: 0;
+          overflow: hidden;
+          padding: 2.5em 5.75em;
+          position: absolute;
+          text-align: center;
+          top: 0;
+          right: 0;
+          -webkit-transition: 0.6s;
+          transition: 0.6s;
+        }
+        .media__body:hover { opacity: 1; }
+        .media__body h2 { margin-top: 0; }
+        .media__body p { margin-bottom: 1.5em; }
+        .scale-media {
+            padding-bottom: 56.25%;
+            position: relative;
+        }
+        .scale-media iframe {
+            border: none;
+            height: 100%;
+            position: absolute;
+            width: 100%;
+            left: 0;
+            top: 0;
+            background-color: black;
+        }
+    </style>
+    <script type="text/javascript" charset="utf-8">
+        // Pause the video when the modal is closed
+        $(document).on('click', '.hanging-close, .modal-backdrop,.modal',
+          function (event) {
+            // Remove the src so the player itself gets removed,
+            // as this is the only reliable way to ensure the video stops
+            // playing in IE
+            $("#trailer-video-container").empty();
+        });
+        // Start playing the video whenever the trailer modal is opened
+        $(document).on('click', '.movie-tile', function (event) {
+            var trailerYouTubeId = $(this).attr('data-trailer-youtube-id')
+            var sourceUrl = 'http://www.youtube.com/embed/' +
+              trailerYouTubeId + '?autoplay=1&html5=1';
+            $("#trailer-video-container").empty().append($
+              ("<iframe></iframe>",{
+              'id': 'trailer-video',
+              'type': 'text-html',
+              'src': sourceUrl,
+              'frameborder': 0
+            }));
+        });
+        // Animate in the movies when the page loads
+        $(document).ready(function () {
+          $('.movie-tile').hide().first().show("fast", function showNext() {
+            $(this).next("div").show("fast", showNext);
+          });
+        });
+    </script>
+</head>
+
+  <body>
+      <!-- Trailer Video Modal -->
+      <div class="modal" id="trailer">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <a href="#" class="hanging-close" data-dismiss="modal"
+            aria-hidden="true">
+              <img src="images/close.png"/>
+            </a>
+            <div class="scale-media" id="trailer-video-container">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Main Page Content -->
+      <div class="container">
+        <div class="navbar navbar-static-top" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <a class="navbar-brand" id="title" href="#">
+                <img src="images/clapper.png">
+                <span id="title">Desert Island Cinema</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    <div class="container">
+      
+<div class="col-xs-6 col-md-6 col-lg-4 movie-tile text-center"
+  data-trailer-youtube-id="dBa8p0NFwM8" data-toggle="modal"
+  data-target="#trailer">
+  <img src="images/proxy.jpg" width="220" height="342">
+  <h3>The Hudsucker Proxy</h3>
+  <div class="media__body">
+    <h2>The Hudsucker Proxy</h2>
+    <br>
+    <p>A naive business graduate is installed as president                         of a manufacturing company as part of a stock scam.                         The plot backfires when the graduate's latest                         invention succeeds.</p>
+    <p>Comedy ~ 111 min ~ 1994</p>
+  </div>
+</div>
+
+<div class="col-xs-6 col-md-6 col-lg-4 movie-tile text-center"
+  data-trailer-youtube-id="wMGaIr7kCqc" data-toggle="modal"
+  data-target="#trailer">
+  <img src="images/stallion.jpg" width="220" height="342">
+  <h3>The Black Stallion</h3>
+  <div class="media__body">
+    <h2>The Black Stallion</h2>
+    <br>
+    <p>A story about a boy shipwrecked with a wild                              stallion. He befriends it and when rescued,                              return to his home where they train to race                              against the fastest horses in the world.</p>
+    <p>Adventure ~ 118 min ~ 1979</p>
+  </div>
+</div>
+
+<div class="col-xs-6 col-md-6 col-lg-4 movie-tile text-center"
+  data-trailer-youtube-id="Ok32VyEQYYc" data-toggle="modal"
+  data-target="#trailer">
+  <img src="images/space.jpg" width="220" height="342">
+  <h3>2001: A Space Odyssey</h3>
+  <div class="media__body">
+    <h2>2001: A Space Odyssey</h2>
+    <br>
+    <p>Humanity finds a mysterious object buried                             beneath the Lunar surface and, with the                             intelligent computer H.A.L. 9000, sets off                             on a quest.</p>
+    <p>Science Fiction ~ 160 min ~ 1968</p>
+  </div>
+</div>
+
+<div class="col-xs-6 col-md-6 col-lg-4 movie-tile text-center"
+  data-trailer-youtube-id="kULwsoCEd3g" data-toggle="modal"
+  data-target="#trailer">
+  <img src="images/cave.jpg" width="220" height="342">
+  <h3>Cave of Forgotten Dreams</h3>
+  <div class="media__body">
+    <h2>Cave of Forgotten Dreams</h2>
+    <br>
+    <p>Werner Herzog gains exclusive access to film                                inside the Chauvet caves of Southern France                                and captures the oldest known pictorial                                creations of humanity.</p>
+    <p>Documentary ~ 90 min ~ 2010</p>
+  </div>
+</div>
+
+<div class="col-xs-6 col-md-6 col-lg-4 movie-tile text-center"
+  data-trailer-youtube-id="FUVnfaA-kpI" data-toggle="modal"
+  data-target="#trailer">
+  <img src="images/standby.jpg" width="220" height="342">
+  <h3>Stand By Me</h3>
+  <div class="media__body">
+    <h2>Stand By Me</h2>
+    <br>
+    <p>After the death of a friend, a writer recounts a                           boyhood journey to find the body of a missing boy.                           Just a lark at first, the boys' adventure evolves                           into a defining event in their lives.</p>
+    <p>Adventure ~ 89 min ~ 1986</p>
+  </div>
+</div>
+
+<div class="col-xs-6 col-md-6 col-lg-4 movie-tile text-center"
+  data-trailer-youtube-id="O3CIXEAjcc8" data-toggle="modal"
+  data-target="#trailer">
+  <img src="images/princess.jpg" width="220" height="342">
+  <h3>The Princess Bride</h3>
+  <div class="media__body">
+    <h2>The Princess Bride</h2>
+    <br>
+    <p>A fairy tale adventure about a beautiful young                              woman and her one true love. They must battle                              the evils of the mythical kingdom of Florin to                              be reunited with each other.</p>
+    <p>Adventure ~ 98 min ~ 1987</p>
+  </div>
+</div>
+
+    </div>
+  </body>
+</html>
